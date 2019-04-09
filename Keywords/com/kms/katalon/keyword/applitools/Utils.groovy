@@ -135,17 +135,17 @@ class Utils {
 	 * @param driver The initialized driver.
 	 * @param activeElement The object needs to set focus on.
 	 */
-	@CompileStatic
-	static void setFocus(WebDriver driver, Object activeElement) throws IOException {
-		if (activeElement != null) {
-			try {
-				((JavascriptExecutor)driver).executeScript("arguments[0].focus();", activeElement)
-			}
-			catch (WebDriverException var15) {
-				KeywordUtil.logInfo("Could not return focus to active element! " + var15.getMessage())
-			}
-		}
-	}
+	//	@CompileStatic
+	//	static void setFocus(WebDriver driver, Object activeElement) throws IOException {
+	//		if (activeElement != null) {
+	//			try {
+	//				((JavascriptExecutor)driver).executeScript("arguments[0].focus();", activeElement)
+	//			}
+	//			catch (WebDriverException var15) {
+	//				KeywordUtil.logInfo("Could not return focus to active element! " + var15.getMessage())
+	//			}
+	//		}
+	//	}
 
 	/**
 	 * Get a RectangleSize object from a specific width and height.

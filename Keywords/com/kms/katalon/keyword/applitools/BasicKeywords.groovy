@@ -1,28 +1,18 @@
 package com.kms.katalon.keyword.applitools
 
-import org.apache.commons.lang3.StringUtils
-import org.openqa.selenium.By
-import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.WebDriverException
 import org.openqa.selenium.WebElement
 
 import com.applitools.eyes.BatchInfo
-import com.applitools.eyes.MatchLevel
 import com.applitools.eyes.RectangleSize
 import com.applitools.eyes.TestResults
 import com.applitools.eyes.selenium.Eyes
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.configuration.RunConfiguration
-import com.kms.katalon.core.exception.StepFailedException
-import com.kms.katalon.core.logging.ErrorCollector
-import com.kms.katalon.core.setting.BundleSettingStore
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.common.WebUiCommonHelper
 import com.kms.katalon.core.webui.driver.DriverFactory
 
-import groovy.json.JsonSlurper
 import groovy.transform.CompileStatic
 
 
@@ -60,7 +50,7 @@ public class BasicKeywords {
 
 	private static void doCheckWindow(Eyes eyes, WebDriver driver, activeElement, List results) {
 		AdvancedKeywords.checkWindow(eyes, null)
-		Utils.setFocus(driver, activeElement)
+		//		Utils.setFocus(driver, activeElement)
 		def result = eyes.close(false)
 		results.add(result)
 	}
@@ -85,13 +75,11 @@ public class BasicKeywords {
 			Object activeElement = Utils.setHideCaret(driver, Utils.HIDE_CARET)
 			if (Utils.APPLITOOLS_VIEW_PORT == null) {
 				driver = eyes.open(driver, Utils.APPNAME, testName)
-				eyes.checkRegion(element, true)
-				Utils.setFocus(driver, activeElement)
-				def result = eyes.close(false)
-				results.add(result)
+				doCheckTestObject(eyes, element, driver, activeElement, results)
 			} else {
 				for (int[] viewport: Utils.APPLITOOLS_VIEW_PORT) {
 					viewportSize = new RectangleSize(viewport[0], viewport[1])
+					KeywordUtil.logInfo("Use view port " + viewportSize);
 					driver = eyes.open(driver, Utils.APPNAME, testName, viewportSize)
 					doCheckTestObject(eyes, element, driver, activeElement, results)
 				}
@@ -102,7 +90,7 @@ public class BasicKeywords {
 
 	private static doCheckTestObject(Eyes eyes, WebElement element, WebDriver driver, activeElement, List results) {
 		eyes.checkRegion(element, true)
-		Utils.setFocus(driver, activeElement)
+		//		Utils.setFocus(driver, activeElement)
 		def result = eyes.close(false)
 		results.add(result)
 	}
