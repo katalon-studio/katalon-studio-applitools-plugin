@@ -1,0 +1,45 @@
+{
+	"keywords": ["com.kms.katalon.keyword.applitools.ApplitoolsKeywords"],
+	"configuration": {
+      "settingId": "com.kms.katalon.keyword.Applitools-Keywords",
+      "settingPage": {
+         "name": "Applitools Integration",
+         "components": [
+            {
+               "key": "API Key",
+               "type": "text",
+               "label": "API Key",
+			   "defaultValue":""
+            },
+			{
+               "key": "Application Name",
+               "type": "text",
+               "label": "Application Name",
+			   "defaultValue":"Katalon Studio"
+            }
+			,
+			{
+               "key": "Hide Caret",
+               "type": "text",
+               "label": "Hide Caret",
+			   "defaultValue":"true"
+            }
+			,
+			{
+               "key": "Match Level",
+               "type": "text",
+               "label": "Match Level",
+			   "defaultValue":"STRICT"
+            }
+			,
+			{
+               "key": "Visual Grid View Port",
+               "type": "text",
+               "label": "Visual Grid View Port",
+			   "defaultValue":""
+            }
+         ]
+      }
+   }
+
+}
