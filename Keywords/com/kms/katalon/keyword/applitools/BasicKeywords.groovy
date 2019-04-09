@@ -59,7 +59,7 @@ public class BasicKeywords {
 	}
 
 	private static void doCheckWindow(Eyes eyes, WebDriver driver, activeElement, List results) {
-		AdvancedKeywords.checkOpenedWindow(eyes, null)
+		AdvancedKeywords.checkWindow(eyes, null)
 		Utils.setFocus(driver, activeElement)
 		def result = eyes.close(false)
 		results.add(result)
@@ -72,7 +72,7 @@ public class BasicKeywords {
 	 */
 	@CompileStatic
 	@Keyword
-	static void checkElement(TestObject testObject, String testName) throws IOException {
+	static void checkTestObject(TestObject testObject, String testName) throws IOException {
 		WebDriver driver = DriverFactory.getWebDriver()
 		List<TestResults> results = new ArrayList<>()
 		RectangleSize viewportSize = null
@@ -93,14 +93,14 @@ public class BasicKeywords {
 				for (int[] viewport: Utils.APPLITOOLS_VIEW_PORT) {
 					viewportSize = new RectangleSize(viewport[0], viewport[1])
 					driver = eyes.open(driver, Utils.APPNAME, testName, viewportSize)
-					doCheckElement(eyes, element, driver, activeElement, results)
+					doCheckTestObject(eyes, element, driver, activeElement, results)
 				}
 			}
 		}
 		Utils.handleResult(results)
 	}
 
-	private static doCheckElement(Eyes eyes, WebElement element, WebDriver driver, activeElement, List results) {
+	private static doCheckTestObject(Eyes eyes, WebElement element, WebDriver driver, activeElement, List results) {
 		eyes.checkRegion(element, true)
 		Utils.setFocus(driver, activeElement)
 		def result = eyes.close(false)

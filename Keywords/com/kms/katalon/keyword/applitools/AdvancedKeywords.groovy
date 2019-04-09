@@ -37,7 +37,7 @@ public class AdvancedKeywords {
 	 */
 	@CompileStatic
 	@Keyword
-	static void checkOpenedWindow(Eyes eyes, String message) throws IOException {
+	static void checkWindow(Eyes eyes, String message) throws IOException {
 		eyes.checkWindow(message)
 	}
 
@@ -52,7 +52,7 @@ public class AdvancedKeywords {
 	 */
 	@CompileStatic
 	@Keyword
-	static void checkOpenedRegion(Eyes eyes, By selector, int matchTimeout, String message, boolean stitchContent ) throws IOException {
+	static void checkRegion(Eyes eyes, By selector, int matchTimeout, String message, boolean stitchContent ) throws IOException {
 		WebDriver driver = DriverFactory.getWebDriver()
 		Object activeElement = Utils.setHideCaret(driver, Utils.HIDE_CARET)
 		eyes.checkRegion(selector, matchTimeout, message, stitchContent)
@@ -70,7 +70,7 @@ public class AdvancedKeywords {
 	 */
 	@CompileStatic
 	@Keyword
-	static void checkOpenedRegion(Eyes eyes, WebElement element, int matchTimeout, String message, boolean stitchContent ) throws IOException {
+	static void checkRegion(Eyes eyes, WebElement element, int matchTimeout, String message, boolean stitchContent ) throws IOException {
 		eyes.checkRegion(element, matchTimeout, message, stitchContent)
 	}
 }

@@ -19,7 +19,7 @@ WebUI.navigateToUrl('http://automationpractice.com/index.php')
 
 CustomKeywords.'com.kms.katalon.keyword.applitools.BasicKeywords.checkWindow'('uniqueString1')
 
-CustomKeywords.'com.kms.katalon.keyword.applitools.BasicKeywords.checkElement'(findTestObject('Object Repository/Page_My Store/input_Call us now_search_query'), 
+CustomKeywords.'com.kms.katalon.keyword.applitools.BasicKeywords.checkTestObject'(findTestObject('Page_My Store/input_Call us now_search_query'), 
     'uniqueString2')
 
 WebUI.closeBrowser()
