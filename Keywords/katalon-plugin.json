@@ -22,7 +22,7 @@
                "key": "Hide Caret",
                "type": "text",
                "label": "Hide Caret",
-			   "defaultValue":"true"
+			   "defaultValue":"false"
             }
 			,
 			{

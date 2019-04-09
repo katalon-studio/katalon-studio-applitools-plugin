@@ -25,7 +25,7 @@ WebUI.openBrowser('https://applitools.com/helloworld2?diff2')
 
 //initialize eyes
 Eyes eyes = CustomKeywords.'com.kms.katalon.keyword.applitools.EyesKeywords.eyesOpen'('sample7', new RectangleSize(
-    1024, 768))
+    1024, 500))
 
 WebDriver driver = DriverFactory.getWebDriver()
 
@@ -55,6 +55,4 @@ CustomKeywords.'com.kms.katalon.keyword.applitools.AdvancedKeywords.checkOpenedW
 CustomKeywords.'com.kms.katalon.keyword.applitools.EyesKeywords.eyesClose'(eyes)
 
 WebUI.closeBrowser()
-
-CustomKeywords.'com.kms.katalon.keyword.applitools.EyesKeywords.eyesOpenWithBaseline'('', '', null)
 

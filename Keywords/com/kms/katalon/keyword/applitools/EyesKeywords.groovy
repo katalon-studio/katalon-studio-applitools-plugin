@@ -44,6 +44,7 @@ public class EyesKeywords {
 			driver = eyes.open(driver, Utils.APPNAME, testName)
 		}
 		else {
+			KeywordUtil.logInfo("Use view port " + viewportSize);
 			driver = eyes.open(driver, Utils.APPNAME, testName, viewportSize)
 		}
 		return eyes

@@ -56,7 +56,7 @@ public class AdvancedKeywords {
 		WebDriver driver = DriverFactory.getWebDriver()
 		Object activeElement = Utils.setHideCaret(driver, Utils.HIDE_CARET)
 		eyes.checkRegion(selector, matchTimeout, message, stitchContent)
-		Utils.setFocus(driver, activeElement)
+		//		Utils.setFocus(driver, activeElement)
 	}
 
 	/**
