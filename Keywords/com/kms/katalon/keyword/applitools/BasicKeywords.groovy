@@ -29,30 +29,32 @@ public class BasicKeywords {
 	@Keyword
 	static void checkWindow(String testName) throws IOException {
 		List<TestResults> results = new ArrayList<>()
-		RectangleSize viewportSize = null
-		Eyes eyes = EyesKeywords.eyesSetUp(testName)
-		BatchInfo batchInfo = new BatchInfo(testName);
-		eyes.setBatch(batchInfo);
-		WebDriver driver = DriverFactory.getWebDriver()
-		Object activeElement = Utils.setHideCaret(driver, Utils.HIDE_CARET)
+		Eyes eyes = EyesKeywords.eyesSetUp()
+		BatchInfo batchInfo = new BatchInfo(testName)
+		eyes.setBatch(batchInfo)
+		final WebDriver driver = DriverFactory.getWebDriver()
 		if (Utils.APPLITOOLS_VIEW_PORT == null) {
 			driver = eyes.open(driver, Utils.APPNAME, testName)
-			doCheckWindow(eyes, driver, activeElement, results)
+			doCheckWindow(eyes, results)
 		} else {
 			for (int[] viewport: Utils.APPLITOOLS_VIEW_PORT) {
-				viewportSize = new RectangleSize(viewport[0], viewport[1])
+				RectangleSize viewportSize = new RectangleSize(viewport[0], viewport[1])
+				KeywordUtil.logInfo("Use view port " + viewportSize)
 				driver = eyes.open(driver, Utils.APPNAME, testName, viewportSize)
-				doCheckWindow(eyes, driver, activeElement, results)
+				doCheckWindow(eyes, results)
 			}
 		}
 		Utils.handleResult(results)
 	}
 
-	private static void doCheckWindow(Eyes eyes, WebDriver driver, activeElement, List results) {
-		AdvancedKeywords.checkWindow(eyes, null)
-		//		Utils.setFocus(driver, activeElement)
-		def result = eyes.close(false)
-		results.add(result)
+	private static void doCheckWindow(Eyes eyes, List results) {
+		try {
+			eyes.checkWindow()
+			def result = eyes.close(false)
+			results.add(result)
+		} finally {
+			eyes.abortIfNotClosed()
+		}
 	}
 
 	/**
@@ -63,35 +65,36 @@ public class BasicKeywords {
 	@CompileStatic
 	@Keyword
 	static void checkTestObject(TestObject testObject, String testName) throws IOException {
-		WebDriver driver = DriverFactory.getWebDriver()
 		List<TestResults> results = new ArrayList<>()
-		RectangleSize viewportSize = null
-		Eyes eyes = EyesKeywords.eyesSetUp(testName)
-		BatchInfo batchInfo = new BatchInfo(testName);
-		eyes.setBatch(batchInfo);
+		Eyes eyes = EyesKeywords.eyesSetUp()
+		BatchInfo batchInfo = new BatchInfo(testName)
+		eyes.setBatch(batchInfo)
 		List rows = WebUiCommonHelper.findWebElements(testObject, 60)
+		final WebDriver driver = DriverFactory.getWebDriver()
 		if (rows.size() >= 1) {
-			WebElement element = (WebElement)rows.get(0);
-			Object activeElement = Utils.setHideCaret(driver, Utils.HIDE_CARET)
+			WebElement element = (WebElement)rows.get(0)
 			if (Utils.APPLITOOLS_VIEW_PORT == null) {
-				driver = eyes.open(driver, Utils.APPNAME, testName)
-				doCheckTestObject(eyes, element, driver, activeElement, results)
+				eyes.open(driver, Utils.APPNAME, testName)
+				doCheckTestObject(eyes, element, results)
 			} else {
 				for (int[] viewport: Utils.APPLITOOLS_VIEW_PORT) {
-					viewportSize = new RectangleSize(viewport[0], viewport[1])
-					KeywordUtil.logInfo("Use view port " + viewportSize);
-					driver = eyes.open(driver, Utils.APPNAME, testName, viewportSize)
-					doCheckTestObject(eyes, element, driver, activeElement, results)
+					RectangleSize viewportSize = new RectangleSize(viewport[0], viewport[1])
+					KeywordUtil.logInfo("Use view port " + viewportSize)
+					eyes.open(driver, Utils.APPNAME, testName, viewportSize)
+					doCheckTestObject(eyes, element, results)
 				}
 			}
 		}
 		Utils.handleResult(results)
 	}
 
-	private static doCheckTestObject(Eyes eyes, WebElement element, WebDriver driver, activeElement, List results) {
-		eyes.checkRegion(element, true)
-		//		Utils.setFocus(driver, activeElement)
-		def result = eyes.close(false)
-		results.add(result)
+	private static doCheckTestObject(Eyes eyes, WebElement element, List results) {
+		try {
+			eyes.checkRegion(element)
+			def result = eyes.close(false)
+			results.add(result)
+		} finally {
+			eyes.abortIfNotClosed()
+		}
 	}
 }

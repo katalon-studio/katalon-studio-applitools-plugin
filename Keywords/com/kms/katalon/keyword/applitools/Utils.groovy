@@ -30,7 +30,6 @@ import groovy.transform.CompileStatic
 class Utils {
 	static BundleSettingStore bundleSetting
 	static String APPNAME
-	static boolean HIDE_CARET
 	static MatchLevel MATCH_LEVEL
 	static String RESULT_MESSAGE
 	static List<int[]> APPLITOOLS_VIEW_PORT
@@ -40,7 +39,6 @@ class Utils {
 			bundleSetting = new BundleSettingStore(RunConfiguration.getProjectDir(), 'com.kms.katalon.keyword.Applitools-Keywords',
 					true)
 			APPNAME = bundleSetting.getString('Application Name', '')
-			HIDE_CARET = Boolean.parseBoolean(bundleSetting.getString('Hide Caret', ''))
 			MATCH_LEVEL = MatchLevel.valueOf(bundleSetting.getString('Match Level', '').toUpperCase())
 			RESULT_MESSAGE = ""
 
@@ -109,43 +107,6 @@ class Utils {
 			KeywordUtil.logInfo(RESULT_MESSAGE)
 		}
 	}
-
-	/**
-	 * Hide the caret (cursor) before an image is captured.
-	 *
-	 * @param driver The initialized driver.
-	 * @param status Set True to enable hiding the caret, false to disable hiding the caret. By default it will hide the caret before capturing the image so don't need to call this function when you don't want to change the default behavior.
-	 * @return The active object.
-	 */
-	@CompileStatic
-	static Object setHideCaret(WebDriver driver, boolean status) throws IOException {
-		Object activeElement = null
-		if (status){
-			activeElement = ((JavascriptExecutor)driver).executeScript("var activeElement = document.activeElement; activeElement && activeElement.blur(); return activeElement;", new Object[0])
-		}
-		else {
-			HIDE_CARET = false
-		}
-		return activeElement
-	}
-
-	/**
-	 * Set focus on a specified object.
-	 *
-	 * @param driver The initialized driver.
-	 * @param activeElement The object needs to set focus on.
-	 */
-	//	@CompileStatic
-	//	static void setFocus(WebDriver driver, Object activeElement) throws IOException {
-	//		if (activeElement != null) {
-	//			try {
-	//				((JavascriptExecutor)driver).executeScript("arguments[0].focus();", activeElement)
-	//			}
-	//			catch (WebDriverException var15) {
-	//				KeywordUtil.logInfo("Could not return focus to active element! " + var15.getMessage())
-	//			}
-	//		}
-	//	}
 
 	/**
 	 * Get a RectangleSize object from a specific width and height.
