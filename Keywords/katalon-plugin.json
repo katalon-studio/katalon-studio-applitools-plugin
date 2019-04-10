@@ -1,6 +1,7 @@
 {
    "keywords": [
-      "com.kms.katalon.keyword.applitools.ApplitoolsKeywords"
+      "com.kms.katalon.keyword.applitools.BasicKeywords",
+      "com.kms.katalon.keyword.applitools.EyesKeywords"
    ],
    "configuration": {
       "settingId": "com.kms.katalon.keyword.Applitools-Keywords",
