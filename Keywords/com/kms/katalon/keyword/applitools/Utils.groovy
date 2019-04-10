@@ -29,6 +29,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class Utils {
 	static BundleSettingStore bundleSetting
+	static String API_KEY
 	static String APPNAME
 	static MatchLevel MATCH_LEVEL
 	static String RESULT_MESSAGE
@@ -36,8 +37,13 @@ class Utils {
 
 	static {
 		try {
-			bundleSetting = new BundleSettingStore(RunConfiguration.getProjectDir(), 'com.kms.katalon.keyword.Applitools-Keywords',
-					true)
+			bundleSetting = new BundleSettingStore(RunConfiguration.getProjectDir(), 'com.kms.katalon.keyword.Applitools-Keywords', true)
+			
+			API_KEY = bundleSetting.getString('API Key', '')
+			if (StringUtils.isBlank(API_KEY)) {
+				throw new IllegalStateException("Applitools's API Key is missing.")
+			}
+			
 			APPNAME = bundleSetting.getString('Application Name', '')
 			MATCH_LEVEL = MatchLevel.valueOf(bundleSetting.getString('Match Level', '').toUpperCase())
 			RESULT_MESSAGE = ""

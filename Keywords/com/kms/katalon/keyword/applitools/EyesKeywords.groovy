@@ -95,7 +95,7 @@ public class EyesKeywords {
 	@Keyword
 	static Eyes eyesInit() {
 		Eyes eyes = new Eyes()
-		eyes.setApiKey(Utils.bundleSetting.getString('API Key', ''))
+		eyes.setApiKey(Utils.API_KEY)
 		return eyes
 	}
 }
