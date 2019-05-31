@@ -8,7 +8,7 @@
 
 Create file /settings/external/com.kms.katalon.keyword.Applitools-Keywords:
 
-```properties
+```
 #Tue Apr 09 09:27:20 ICT 2019
 Visual\ Grid\ View\ Port=""
 API\ Key="<Applitools API Key>"
