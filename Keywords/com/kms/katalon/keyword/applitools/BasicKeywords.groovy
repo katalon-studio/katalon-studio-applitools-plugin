@@ -32,7 +32,7 @@ public class BasicKeywords {
 		Eyes eyes = EyesKeywords.eyesSetUp()
 		BatchInfo batchInfo = new BatchInfo(testName)
 		eyes.setBatch(batchInfo)
-		final WebDriver driver = DriverFactory.getWebDriver()
+		final WebDriver driver = Utils.getDriverForEyes();
 		if (Utils.APPLITOOLS_VIEW_PORT == null) {
 			driver = eyes.open(driver, Utils.APPNAME, testName)
 			doCheckWindow(eyes, results)
@@ -70,7 +70,7 @@ public class BasicKeywords {
 		BatchInfo batchInfo = new BatchInfo(testName)
 		eyes.setBatch(batchInfo)
 		List rows = WebUiCommonHelper.findWebElements(testObject, 60)
-		final WebDriver driver = DriverFactory.getWebDriver()
+		final WebDriver driver = Utils.getDriverForEyes();
 		if (rows.size() >= 1) {
 			WebElement element = (WebElement)rows.get(0)
 			if (Utils.APPLITOOLS_VIEW_PORT == null) {

@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebDriverException
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.events.EventFiringWebDriver
 
 import com.applitools.eyes.BatchInfo
 import com.applitools.eyes.MatchLevel
@@ -38,12 +39,12 @@ class Utils {
 	static {
 		try {
 			bundleSetting = new BundleSettingStore(RunConfiguration.getProjectDir(), 'com.kms.katalon.keyword.Applitools-Keywords', true)
-			
+
 			API_KEY = bundleSetting.getString('API Key', '')
 			if (StringUtils.isBlank(API_KEY)) {
 				throw new IllegalStateException("Applitools's API Key is missing.")
 			}
-			
+
 			APPNAME = bundleSetting.getString('Application Name', '')
 			MATCH_LEVEL = MatchLevel.valueOf(bundleSetting.getString('Match Level', '').toUpperCase())
 			RESULT_MESSAGE = ""
@@ -124,5 +125,20 @@ class Utils {
 	@CompileStatic
 	static RectangleSize getViewport(int width, int height) {
 		return new RectangleSize(width, height)
+	}
+
+	/**
+	 * Since 7.0 Katalon's Web Driver is wrapped inside EventFiringWebDriver which is incompatible
+	 * with RemoteWebDriver. This method attempts to unwrap it and get back the original web driver
+	 * @return The original WebDriver
+	 */
+	@CompileStatic
+	static WebDriver getDriverForEyes() {
+		WebDriver katalonWebDriver = DriverFactory.getWebDriver();
+		if(katalonWebDriver instanceof EventFiringWebDriver) {
+			EventFiringWebDriver eventFiring = (EventFiringWebDriver) DriverFactory.getWebDriver();
+			return eventFiring.getWrappedDriver();
+		}
+		return katalonWebDriver;
 	}
 }

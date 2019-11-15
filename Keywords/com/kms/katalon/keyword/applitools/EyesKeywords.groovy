@@ -5,9 +5,7 @@ import org.openqa.selenium.WebDriver
 import com.applitools.eyes.RectangleSize
 import com.applitools.eyes.TestResults
 import com.applitools.eyes.selenium.Eyes
-import com.applitools.eyes.selenium.StitchMode
 import com.kms.katalon.core.annotation.Keyword
-import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.driver.DriverFactory
 
 import groovy.transform.CompileStatic
@@ -60,7 +58,7 @@ public class EyesKeywords {
 	@Keyword
 	static Eyes eyesOpenWithBaseline(String baselineName, String testName, RectangleSize viewportSize) throws IOException {
 		Eyes eyes = eyesInit()
-		WebDriver driver = DriverFactory.getWebDriver()
+		final WebDriver driver = Utils.getDriverForEyes();
 		if (baselineName != null) {
 			eyes.setBaselineEnvName(baselineName)
 		}
