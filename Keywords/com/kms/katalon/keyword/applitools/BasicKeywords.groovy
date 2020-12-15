@@ -2,16 +2,18 @@ package com.kms.katalon.keyword.applitools
 
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.remote.RemoteWebElement
 
 import com.applitools.eyes.BatchInfo
+import com.applitools.eyes.Location
 import com.applitools.eyes.RectangleSize
+import com.applitools.eyes.Region
 import com.applitools.eyes.TestResults
 import com.applitools.eyes.selenium.Eyes
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webui.common.WebUiCommonHelper
-import com.kms.katalon.core.webui.driver.DriverFactory
 
 import groovy.transform.CompileStatic
 
@@ -87,10 +89,23 @@ public class BasicKeywords {
 		}
 		Utils.handleResult(results)
 	}
+	
+	@CompileStatic
+	@Keyword
+	static void checkElement(Eyes eyes, WebElement element) {
+		if (element instanceof RemoteWebElement) {
+			eyes.checkRegion(element)
+		} else {
+			Location location = new Location(element.getLocation().x, element.getLocation().y)
+			RectangleSize rect = new RectangleSize(element.getRect().width, element.getRect().height)
+			Region region = new Region(location, rect)
+			eyes.checkRegion(region)
+		}
+	}
 
 	private static doCheckTestObject(Eyes eyes, WebElement element, List results) {
 		try {
-			eyes.checkRegion(element)
+			checkElement(eyes, element)
 			def result = eyes.close(false)
 			results.add(result)
 		} finally {

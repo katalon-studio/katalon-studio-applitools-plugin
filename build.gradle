@@ -37,7 +37,7 @@ task sourceJar(type: Jar, dependsOn: classes) {
 }
 
 dependencies {
-  compile('com.applitools:eyes-selenium-java3:3.164.0') {
+  compile('com.applitools:eyes-selenium-java3:3.188.0') {
     exclude group: 'org.seleniumhq.selenium'
   }
 }
