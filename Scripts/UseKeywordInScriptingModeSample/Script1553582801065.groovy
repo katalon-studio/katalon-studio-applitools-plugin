@@ -26,7 +26,7 @@ driver.findElement(By.tagName('button')).click()
 WebElement element = driver.findElement(By.xpath('//img[contains(@class,\'diff2\')]'))
 
 //check region by web element
-eyes.checkRegion(element, 'check checkRegion by web element keyword')
+CustomKeywords.'com.kms.katalon.keyword.applitools.BasicKeywords.checkElement'(eyes, element)
 
 //check window not including eyes set up
 eyes.checkWindow('check checkWindow')
