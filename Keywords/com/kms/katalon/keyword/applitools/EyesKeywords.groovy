@@ -1,5 +1,6 @@
 package com.kms.katalon.keyword.applitools
 
+import org.apache.commons.lang3.StringUtils
 import org.openqa.selenium.WebDriver
 
 import com.applitools.eyes.RectangleSize
@@ -93,6 +94,9 @@ public class EyesKeywords {
 	@Keyword
 	static Eyes eyesInit() {
 		Eyes eyes = new Eyes()
+		if (StringUtils.isNotBlank(Utils.SERVER_URL)) {
+			eyes.setServerUrl(Utils.SERVER_URL)
+		}
 		eyes.setApiKey(Utils.API_KEY)
 		return eyes
 	}
