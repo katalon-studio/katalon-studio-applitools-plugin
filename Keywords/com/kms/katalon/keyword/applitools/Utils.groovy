@@ -30,6 +30,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class Utils {
 	static BundleSettingStore bundleSetting
+	static String SERVER_URL
 	static String API_KEY
 	static String APPNAME
 	static MatchLevel MATCH_LEVEL
@@ -39,6 +40,8 @@ class Utils {
 	static {
 		try {
 			bundleSetting = new BundleSettingStore(RunConfiguration.getProjectDir(), 'com.kms.katalon.keyword.Applitools-Keywords', true)
+
+			SERVER_URL = bundleSetting.getString('Server URL', '')
 
 			API_KEY = bundleSetting.getString('API Key', '')
 			if (StringUtils.isBlank(API_KEY)) {

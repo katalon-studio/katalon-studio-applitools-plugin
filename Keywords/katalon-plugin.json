@@ -9,6 +9,12 @@
          "name": "Applitools Integration",
          "components": [
             {
+               "key": "Server URL",
+               "type": "text",
+               "label": "Server URL",
+               "defaultValue": ""
+            },
+            {
                "key": "API Key",
                "type": "text",
                "label": "API Key",
